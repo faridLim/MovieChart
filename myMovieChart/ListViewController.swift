@@ -36,7 +36,7 @@ class ListViewController : UITableViewController{
     //현재까지 읽어온 데이터의 페이지 정보
     var page = 1
     //테이블 뷰를 구성할 리스트 데이터
-    var list = [movieVO]()
+  lazy  var list = [movieVO]()
     
     
     @IBOutlet var moreBtn: UIButton!
@@ -64,7 +64,7 @@ class ListViewController : UITableViewController{
     func callMovieAPI(){
 
         //API호출을 위한 URI 생성
-        let url = "http://115.68.183.178:2029/hoppin/movies?order=releasedateasc&count=30&page=\(self.page)&version=1&genreId="
+        let url = "http://115.68.183.178:2029/hoppin/movies?order=releasedateasc&count=15&page=\(self.page)&version=1&genreId="
         let apiURI : URL! = URL(string: url)
         
         //RestApi를 호출
@@ -98,13 +98,6 @@ class ListViewController : UITableViewController{
                 mvo.detail = r["linkUrl"] as? String
                 mvo.rating = ((r["ratingAverage"] as! NSString).doubleValue)
                 
-                
-                //썸네일 경로를 인자값으로 하는 URI 객체 생성
-                let url : URL! = URL(string: mvo.thumbnail!)
-                //이미지를 읽어와 Data 객체에 저장
-                let imageData = try! Data(contentsOf: url)
-                //UIImage 객체를 생성하여 mvo 상수의 속성에 대입
-                mvo.thumbnailImage = UIImage(data: imageData)
                 
                 //list배열에 추가
                 self.list.append(mvo)
@@ -145,8 +138,14 @@ class ListViewController : UITableViewController{
         cell.desc?.text = movieData.description
         cell.opendate?.text = movieData.opendate
         cell.rating?.text = "\(movieData.rating!)"
-        cell.thumbnail.image = movieData.thumbnailImage
         
+        //** 비동기방식으로 썸네일 이미지를 읽어옴
+        DispatchQueue.main.async(execute:{
+            NSLog("비동기 방식으로 실행되는 부분입니다.")
+            cell.thumbnail.image = self.getThumbnailImage(_index: indexPath.row)
+        })
+        
+        NSLog("메소드 실행을 종료하고 셀을 리턴합니다.")
         return cell
    
         /*  태그로 값변경
@@ -172,6 +171,24 @@ class ListViewController : UITableViewController{
          return cell
          */
         
+    }
+    
+    //썸네일 이미지를 가져오는 메소드 - 메모이제이션 기법 적용
+    func getThumbnailImage(_index : Int) -> UIImage{
+        //인자값으로 받은 인덱스를 기반으로 해당하는 배열 데이터를 읽어옴
+        let mvo = self.list[_index]
+        
+        //메모이제이션 : 저장된이미지가 있으면, 그것을 반환하고, 없을 경우 내려 받아 저장 후 반환
+        
+        if let savedImage = mvo.thumbnailImage{
+            return savedImage
+        }else{
+            let url : URL! = URL(string : mvo.thumbnail!)
+            let imageData = try! Data(contentsOf: url)
+            mvo.thumbnailImage = UIImage(data: imageData)
+            
+            return mvo.thumbnailImage! //저장된 이미지를 반환
+        }
     }
     
   
