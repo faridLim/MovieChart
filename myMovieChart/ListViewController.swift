@@ -190,9 +190,23 @@ class ListViewController : UITableViewController{
             return mvo.thumbnailImage! //저장된 이미지를 반환
         }
     }
-    
-  
-    
-    
-    
+}
+
+extension ListViewController{
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segue_detail"{
+            //sender 인자를 캐스팅하여 테이블 셀 객체로 변환
+            let cell = sender as! MovieCell
+            
+            //사용자가 클릭한 셀의 행을 찾아냄
+            let path = self.tableView.indexPath(for: cell)
+            
+            //API 영화 데이터 배열중에서 선택된 행에 대한 영화데이터를 추출
+            let movieinfo = self.list[path!.row]
+            
+            //선택된 행의 영화데이터를 목적지 뷰컨 mvo변수에 대입
+            let detailVC = segue.destination as? DetailViewController
+            detailVC?.mvo = movieinfo
+        }
+    }
 }

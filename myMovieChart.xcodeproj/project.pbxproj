@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F8161D9C274E29FC002E9C18 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8161D9B274E29FC002E9C18 /* DetailViewController.swift */; };
 		F823058E272BBA2800B9E86F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F823058D272BBA2800B9E86F /* AppDelegate.swift */; };
 		F8230590272BBA2800B9E86F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F823058F272BBA2800B9E86F /* SceneDelegate.swift */; };
 		F8230595272BBA2800B9E86F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8230593272BBA2800B9E86F /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F8161D9B274E29FC002E9C18 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		F823058A272BBA2800B9E86F /* myMovieChart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myMovieChart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F823058D272BBA2800B9E86F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F823058F272BBA2800B9E86F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				F823059B272BBA2800B9E86F /* Info.plist */,
 				F82305A1272BBB3900B9E86F /* ListViewController.swift */,
 				F82305A3272BC23300B9E86F /* movieVO.swift */,
+				F8161D9B274E29FC002E9C18 /* DetailViewController.swift */,
 			);
 			path = myMovieChart;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 				F823058E272BBA2800B9E86F /* AppDelegate.swift in Sources */,
 				F82305A4272BC23300B9E86F /* movieVO.swift in Sources */,
 				F8230590272BBA2800B9E86F /* SceneDelegate.swift in Sources */,
+				F8161D9C274E29FC002E9C18 /* DetailViewController.swift in Sources */,
 				F86095EB273A624600AA634C /* MovieCell.swift in Sources */,
 				F82305A2272BBB3900B9E86F /* ListViewController.swift in Sources */,
 			);
